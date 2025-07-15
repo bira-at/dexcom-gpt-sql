@@ -35,10 +35,7 @@ def frage_zu_sql(frage):
 
    res  = client.completions.create(model='gpt-3.5-turbo-instruct',prompt=prompt,temperature=0,max_tokens=150,stop=["#",";"])
       #model='gpt-3.5-turbo-instruct',prompt=prompt)
-
-
-  
-    return res.choices[0].message["content"].strip()
+  return res.choices[0].text.strip()
 
 if frage:
     with st.spinner("GPT fordert SQL..."):
