@@ -46,8 +46,8 @@ if frage:
     url = f"https://bira.at/cgi-bin/get_dexcom.py?query={encoded}"
     res = requests.get(url)
 
-   if res.ok:
-       try:
+    if res.ok:
+        try:
         st.write("📩 Rohantwort vom Server:")
         st.code(res.text)
         data = res.json().get("data", [])
