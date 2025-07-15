@@ -25,7 +25,7 @@ def frage_zu_sql(frage):
     - `Wert` (INTEGER)
 
     Benutzerfrage: {frage}
-    Gib nur das passende SQL-Statement zurück, ohne Erklärung.
+    Gib nur das passende SQL-Statement, die Datenbank ist MySQL,  zurück, ohne Erklärung.
     """
   #  res = openai.ChatCompletion.create(
   #      model="gpt-4",
