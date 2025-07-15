@@ -46,15 +46,19 @@ if frage:
     url = f"https://bira.at/cgi-bin/get_dexcom.py?query={encoded}"
     res = requests.get(url)
 
-    if res.ok:
+   if res.ok:
+    try:
+        st.write("📩 Rohantwort vom Server:")
+        st.code(res.text)
         data = res.json().get("data", [])
-        if data:
-            df = pd.DataFrame(data, columns=["Uhrzeit", "Wert"])
-            df["Uhrzeit"] = pd.to_datetime(df["Uhrzeit"])
-            st.success("Daten geladen")
-            st.dataframe(df)
-            st.line_chart(df.set_index("Uhrzeit")["Wert"])
-        else:
+        if not data:
             st.warning("Keine Daten erhalten.")
+            st.stop()
+    except Exception as e:
+        st.error("Fehler beim Verarbeiten der Antwort:")
+        st.exception(e)
+        st.stop()
     else:
-        st.error("Fehler beim Laden der Daten.")
+        st.error(f"Serverantwort: {res.status_code}")
+        st.code(res.text)
+        st.stop()
