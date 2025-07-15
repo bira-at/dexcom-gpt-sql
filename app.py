@@ -27,11 +27,17 @@ def frage_zu_sql(frage):
     Benutzerfrage: {frage}
     Gib nur das passende SQL-Statement zurück, ohne Erklärung.
     """
-    res = openai.ChatCompletion.create(
-        model="gpt-4",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0
-    )
+  #  res = openai.ChatCompletion.create(
+  #      model="gpt-4",
+  #      messages=[{"role": "user", "content": prompt}],
+  #      temperature=0
+  #  )
+
+   res  = client.completions.create(model='gpt-3.5-turbo-instruct',prompt=prompt,temperature=0,max_tokens=150,stop=["#",";"])
+      #model='gpt-3.5-turbo-instruct',prompt=prompt)
+
+
+  
     return res.choices[0].message["content"].strip()
 
 if frage:
