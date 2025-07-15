@@ -3,7 +3,7 @@ import pandas as pd
 import requests
 import openai
 import urllib.parse
-import streamlit_speech_recognition as sr
+#import streamlit_speech_recognition as sr
 
 openai.api_key = st.secrets["openai_api_key"]
 
@@ -11,8 +11,8 @@ st.set_page_config(page_title="Blutzucker GPT", layout="centered")
 st.title("🧠 Blutzucker-Analyse mit Sprache & GPT")
 
 # Spracheingabe
-spoken = sr.speech_to_text(language="de-DE", start_prompt="Sprich deine Frage…")
-frage = spoken or st.text_input("Oder gib deine Frage ein:")
+#spoken = sr.speech_to_text(language="de-DE", start_prompt="Sprich deine Frage…")
+frage = st.text_input("Oder gib deine Frage ein:")
 
 def frage_zu_sql(frage):
     prompt = f"""
