@@ -2,5 +2,4 @@ streamlit
 openai
 pandas
 requests
-streamlit_speech_recognition
 matplotlib
