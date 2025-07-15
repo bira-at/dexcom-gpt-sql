@@ -47,17 +47,17 @@ if frage:
     res = requests.get(url)
 
    if res.ok:
-    try:
+       try:
         st.write("📩 Rohantwort vom Server:")
         st.code(res.text)
         data = res.json().get("data", [])
         if not data:
             st.warning("Keine Daten erhalten.")
             st.stop()
-    except Exception as e:
-        st.error("Fehler beim Verarbeiten der Antwort:")
-        st.exception(e)
-        st.stop()
+        except Exception as e:
+            st.error("Fehler beim Verarbeiten der Antwort:")
+            st.exception(e)
+            st.stop()
     else:
         st.error(f"Serverantwort: {res.status_code}")
         st.code(res.text)
