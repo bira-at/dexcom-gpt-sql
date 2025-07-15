@@ -48,12 +48,12 @@ if frage:
 
     if res.ok:
         try:
-        st.write("📩 Rohantwort vom Server:")
-        st.code(res.text)
-        data = res.json().get("data", [])
-        if not data:
-            st.warning("Keine Daten erhalten.")
-            st.stop()
+            st.write("📩 Rohantwort vom Server:")
+            st.code(res.text)
+            data = res.json().get("data", [])
+            if not data:
+                st.warning("Keine Daten erhalten.")
+                st.stop()
         except Exception as e:
             st.error("Fehler beim Verarbeiten der Antwort:")
             st.exception(e)
