@@ -5,7 +5,7 @@ import openai
 import urllib.parse
 #import streamlit_speech_recognition as sr
 
-openai.api_key = st.secrets["openai_api_key"]
+openai.api_key = st.secrets["openai"]
 
 st.set_page_config(page_title="Blutzucker GPT", layout="centered")
 st.title("🧠 Blutzucker-Analyse mit Sprache & GPT")
