@@ -68,20 +68,39 @@ if not res.ok:
     st.stop()
 
 # Versuche JSON zu dekodieren
+import json
+
 try:
     if not res.text.strip():
         st.error("🚫 Leere Antwort vom Server erhalten.")
         st.stop()
 
-    data = res.json().get("data", [])
+    # Versuche den JSON-Teil aus der Antwort zu extrahieren
+    text = res.text.strip()
+
+    # Finde die erste geschweifte Klammer (JSON-Start)
+    json_start = text.find("{")
+    if json_start == -1:
+        st.error("❌ Kein JSON gefunden in der Antwort:")
+        st.code(text)
+        st.stop()
+
+    json_text = text[json_start:]
+    parsed = json.loads(json_text)
+
+    data = parsed.get("data", [])
     if not data:
         st.warning("⚠️ JSON erhalten, aber keine Daten vorhanden.")
-        st.code(res.json())
+        st.code(parsed)
         st.stop()
+
+    df = pd.DataFrame(data)
+
 except Exception as e:
-    st.error("🧨 Fehler beim Parsen der Serverantwort als JSON:")
-
-
+    st.error("🧨 Fehler beim Parsen der Serverantwort:")
+    st.code(res.text)
+    st.exception(e)
+    st.stop()
 
 df = pd.DataFrame(data)
 df['Uhrzeit'] = pd.to_datetime(df['Uhrzeit'])
