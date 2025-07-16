@@ -119,12 +119,12 @@ if data:
 else:
     st.warning("Keine Daten erhalten.")
 
-df['Uhrzeit'] = pd.to_datetime(df['Uhrzeit'])
-df = df.sort_values("Uhrzeit")
+#df['Uhrzeit'] = pd.to_datetime(df['Uhrzeit'])
+#df = df.sort_values("Uhrzeit")
 
 # Zielbereich-Kennzeichnung
 df["Zone"] = pd.cut(df["Wert"],
-    bins=[-float("inf"), 70, 140, float("inf")],
+    bins=[-float("inf"), 70, 180, float("inf")],
     labels=["Unterzuckerung", "Normalbereich", "Überzuckerung"]
 )
 
