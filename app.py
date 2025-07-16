@@ -29,7 +29,7 @@ def frage_zu_sql(frage, start_date, end_date):
     - `Uhrzeit` (DATETIME)
     - `Wert` (INTEGER)
 
-    Schreibe ein SQL-Statement für folgende Benutzerfrage:
+    Schreibe ein SQL-Statement für folgende Benutzerfrage in MySQL Syntax:
     '{frage}'
 
     Es sollen nur Daten zwischen '{start_date} 00:00:00' und '{end_date} 23:59:59' berücksichtigt werden.
