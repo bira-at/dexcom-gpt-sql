@@ -121,7 +121,9 @@ else:
 # GPT-Analyse bei Bedarf
 if frage and any(kw in frage.lower() for kw in ["hypo", "schwank", "analyse", "erkläre"]):
     st.subheader("🧠 GPT-Analyse")
-    daten_input = df[["Uhrzeit", "Wert"]].to_csv(index=False)
+    #daten_input = df[["Uhrzeit", "Wert"]].to_csv(index=False)
+    daten_input = df[["Uhrzeit", "Wert"]].tail(100).to_csv(index=False)
+
     analyse_prompt = f"""
     Du bist ein medizinischer Datenanalyst. Analysiere diese Blutzuckerdaten aus einer CSV mit Spalten 'Uhrzeit' und 'Wert' (mg/dl):
 
