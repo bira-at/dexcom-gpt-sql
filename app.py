@@ -63,19 +63,24 @@ url = f"https://bira.at/cgi-bin/get_dexcom.py?query={encoded}"
 res = requests.get(url)
 
 if not res.ok:
-    st.error(f"Fehler vom Server ({res.status_code})")
-    st.code(res.text)
+    st.error(f"❌ Serverantwort-Fehler (HTTP {res.status_code})")
+    st.code(res.text or "Leere Antwort vom Server")
     st.stop()
 
+# Versuche JSON zu dekodieren
 try:
+    if not res.text.strip():
+        st.error("🚫 Leere Antwort vom Server erhalten.")
+        st.stop()
+
     data = res.json().get("data", [])
     if not data:
-        st.warning("⚠️ Keine Daten gefunden.")
+        st.warning("⚠️ JSON erhalten, aber keine Daten vorhanden.")
+        st.code(res.json())
         st.stop()
 except Exception as e:
-    st.error("Fehler beim Verarbeiten der Antwort:")
-    st.exception(e)
-    st.stop()
+    st.error("🧨 Fehler beim Parsen
+
 
 df = pd.DataFrame(data)
 df['Uhrzeit'] = pd.to_datetime(df['Uhrzeit'])
