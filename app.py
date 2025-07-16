@@ -102,7 +102,23 @@ except Exception as e:
     st.exception(e)
     st.stop()
 
-df = pd.DataFrame(data)
+#df = pd.DataFrame(data)
+if data:
+    df = pd.DataFrame(data)
+
+    # Wenn Zeitspalte enthalten ist → Datumsverarbeitung
+    if "Uhrzeit" in df.columns:
+        df["Uhrzeit"] = pd.to_datetime(df["Uhrzeit"])
+        df = df.sort_values("Uhrzeit")
+        st.line_chart(df.set_index("Uhrzeit")["Wert"])
+    else:
+        # Nur Zahlen (z. B. COUNT)
+        st.dataframe(df)
+        if df.shape == (1, 1):
+            st.metric("Ergebnis", df.iloc[0, 0])
+else:
+    st.warning("Keine Daten erhalten.")
+
 df['Uhrzeit'] = pd.to_datetime(df['Uhrzeit'])
 df = df.sort_values("Uhrzeit")
 
