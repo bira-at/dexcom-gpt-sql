@@ -79,7 +79,8 @@ try:
         st.code(res.json())
         st.stop()
 except Exception as e:
-    st.error("🧨 Fehler beim Parsen
+    st.error("🧨 Fehler beim Parsen der Serverantwort als JSON:")
+
 
 
 df = pd.DataFrame(data)
